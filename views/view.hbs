@@ -1,0 +1,305 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Tampilan awal</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  {{!-- CSS STYLING --}}
+    <style>
+      .*{
+        margin:0px;
+        padding:0px;
+      }
+      .header{
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+        width: auto;
+
+      }
+      .container img{
+        width: 15%;
+        float: left;
+
+      }
+      .container button{
+      
+        float: right;
+        margin-top: 40px;
+        margin-right: 10%;
+        width: 15%;
+        font-family: Open Sans;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 41px;
+        color: #FFFFFF;
+        background: #FADC9C;
+        border-radius: 10px;
+        border: none;
+      }
+
+      .container input{
+        
+        float: left;
+        padding-left:20px;
+        width: 50%;
+        margin-top: 40px;
+        margin-left: 5%;
+        background: #CECECE;
+        border-radius: 10px;
+        border: none;
+        font-family: Airbnb Cereal App;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 30px;
+        line-height: 39px;
+        color: #FFFFFF;
+      }
+        table{
+        
+          left: 104px;
+          top: 231px;
+        }
+
+        thead{
+        
+          background: #FADC9C;
+          box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+          border-radius: 20px 20px 0px 0px;
+
+          font-family: Airbnb Cereal App;
+          font-size: 30px;
+          line-height: 39px;
+          text-align: center;
+
+          color: #FFFFFF;
+        }
+
+        tbody{
+        
+          background: #FFFFFF;
+          box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+          border-radius: 0px 0px 20px 20px;
+          font-family: Airbnb Cereal App;
+          font-size: 30px;
+          line-height: 39px;
+
+          color: #000000;
+        }
+
+        #icon img {
+            width: 75px;
+            height: 50px;
+        }
+{{!-- UNTUK MODAL --}}
+h5#exampleModalLabel {
+    font-size: 30px;
+    font-weight: bolder;
+    margin-right: 25%;
+    float:left;
+}
+
+button.close{
+  float:right;
+}
+
+input.form-control {
+    border: none;
+    border-bottom: solid 2px grey;
+    height: 7%;
+    width: 75%;
+    margin-left: 12%;
+    
+}
+
+select.form-control {
+  border: none;
+    border-bottom: solid 2px grey;
+    height: 7%;
+    width: 75%;
+    margin-left: 12%;
+}
+
+select option{
+    height: 7%;
+    width: 75%;
+    margin-left: 12%;
+}
+
+.form-group {
+    margin: 0px;
+}
+
+    </style>
+</head>
+<body>
+  <div class='container header'>
+      <img src='http://www.scholarsofficial.com/wp-content/uploads/2020/04/Beasiswa-BootCamp-Arkademy-untuk-Belajar-Pemrograman-630x380.png'>
+      <div>
+        <input placeholder='search' type='text'></input>
+      </div>
+      <button data-toggle="modal" data-target="#myModalAdd">ADD</button>
+  </div>
+  <div class="container">
+    <table class="table" id="mytable">
+      <thead>
+        <tr id='table-hd'>
+          <th>No</th>
+          <th>cashier</th>
+          <th>product</th>
+          <th>category</th>
+          <th>price</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+         {{#each results}}
+        <tr>
+          <td>{{ No }}</td>
+          <td>{{ cashier }}</td>
+          <td>{{ product }}</td>
+          <td>{{ category }}</td>
+          <td>{{ price }}</td>
+          <td id='icon'>
+              <a href="javascript:void(0);" data-id="{{ No }}" data-cashier="{{ cashier }}" data-product="{{ product }}" data-category="{{ category }}" data-price="{{ price }}"class = 'edit'><img src="https://images.squarespace-cdn.com/content/v1/5b197ae52714e55328e13e09/1528831440498-EIGLETS06R021L9JJC7C/ke17ZwdGBToddI8pDm48kHbkOJqghF7JPCfLUhtMPzBZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpxvJn9eApbFIpxP-4JKVFckMyI_etZnE1WUbY2mP4c-4OS9u90y_aBFy47gIloprcw/icon-edit.png"></a>
+              <a href="javascript:void(0);" class="btn btn-sm delete" data-id="{{ No }}"><img src="https://cdn2.iconfinder.com/data/icons/thin-line-color-1/21/33-512.png"></a>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal Add Produk-->
+      <form action="/save" method="post">
+        <div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+           <div class="modal-content">
+             <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Add</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+               </button>
+             </div>
+             <div class="modal-body">       
+               <div class="form-group">
+                      <select type='text' name="cashier" class="form-control" placeholder="cashier" required>
+                          <option>Pevita Pearce</option>
+                          <option>Raisa Andriana</option>
+                          <option>Asep Agus Heri H</option>
+                      </select>
+               </div>
+ 
+               <div class="form-group">
+                   <input type="text" name="product" class="form-control" placeholder="Product" required>
+               </div>
+               <div class="form-group">
+                  <select type='text' name="category" class="form-control" placeholder="Category" required>
+                    <option>Food</option>
+                    <option>Drink</option>
+                  </select>
+               </div>
+               <div class="form-group">
+                   <input type="text" name="price" class="form-control" placeholder="price" required>
+               </div>
+             </div>
+             <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               <button type="submit" class="btn btn-primary">Save</button>
+             </div>
+           </div>
+         </div>
+        </div>
+     </form>
+ 
+     <!-- Modal Update Produk-->
+   <form action="/update" method="post">
+       <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+             <div class="form-group">
+                   <input type="text" name="cashier" class="cashier form-control" placeholder="cashier" required>
+               </div>  
+            <div class="form-group">
+                   <input type="text" name="product" class="product form-control" placeholder="Product" required>
+               </div>
+ 
+               <div class="form-group">
+                   <input type="text" name="category" class="category form-control" placeholder="Category" required>
+               </div>
+               <div class="form-group">
+                   <input type="text" name="price" class="price form-control" placeholder="Price" required>
+               </div>
+            </div>
+            <div class="modal-footer">
+              <input type="hidden" name="id" class="id form-control">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+          </div>
+        </div>
+       </div>
+  </form>
+ 
+     <!-- Modal Delete Produk-->
+      <form id="add-row-form" action="/delete" method="post">
+         <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+               <div class="modal-content">
+                   <div class="modal-header">
+              <h5 class="modal-title" id="myModalLabel">Delete Product</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                   </div>
+                   <div class="modal-body">
+                      <strong>Anda yakin mau menghapus data ini?</strong>
+                   </div>
+                   <div class="modal-footer">
+                        <input type="hidden" name="id" class="form-control product_id2" required>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Delete</button>
+                   </div>
+                    </div>
+            </div>
+         </div>
+     </form>
+ 
+<script src="/assets/js/jquery-3.3.1.js"></script>
+<script src="/assets/js/bootstrap.js"></script>
+<script>
+    $(document).ready(function(){
+            //tampilkan data ke modal untuk edit
+      $('#mytable').on('click','.edit',function(){
+        var cashier = $(this).data('cashier');
+        var product = $(this).data('product');
+        var category = $(this).data('category');
+        var price = $(this).data('price');
+        var id = $(this).data('id');
+        $('#EditModal').modal('show');
+        $('.cashier').val(cashier);
+        $('.product').val(product);
+        $('.category').val(category);
+        $('.price').val(price);
+        $('.id').val(id);
+      });
+            //tampilkan modal hapus record
+            $('#mytable').on('click','.delete',function(){
+        var id = $(this).data('id');
+        $('#DeleteModal').modal('show');
+        $('.product_id2').val(id);
+      });
+ 
+    });
+</script>
+
+</body>
+</html>
